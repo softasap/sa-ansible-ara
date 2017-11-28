@@ -5,6 +5,6 @@ command={{ara_virtual_env | default("/usr/local")}}/bin/ara-manage runserver -h 
 autostart=true
 autorestart=true
 redirect_stderr=true
-user=ara
+user={{ara_user}}
 stdout_logfile=syslog
 stderr_logfile=syslog

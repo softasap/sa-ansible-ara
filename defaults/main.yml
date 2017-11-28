@@ -7,7 +7,8 @@ option_configure_startup: true
 option_configure_nginx: true
 
 ara_user: ara
-ara_home: "/home/{{ara_user}}"
+ara_master_user: "{{ansible_user_id}}"
+ara_home: "/home/{{ara_user}}/ara"
 # ara_virtual_env: "/home/{{ara_user}}/virtual_envs"
 # ara_version: "0.11.0"
 ara_log_dir: /var/log/ara

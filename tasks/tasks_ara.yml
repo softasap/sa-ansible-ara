@@ -6,7 +6,7 @@
       - ara
 
   - name: ARA | Create directories
-    file: path="{{item}}" state=directory owner="{{ara_user}}"
+    file: path="{{item}}" state=directory owner="{{ara_user}}" group="{{ara_master_user}}" mode="u=rw,g=rw,o="
     with_items:
       - "{{ara_home}}"
       - "{{ara_log_dir}}"
