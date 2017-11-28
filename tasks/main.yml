@@ -10,3 +10,5 @@
 
   - include: tasks_ara_nginx.yml
     when: option_configure_nginx
+
+  - debug: msg=" Use ANSIBLE_CALLBACK_PLUGINS={{ara_location}}/plugins/callbacks to instruct ansible to report to ara"

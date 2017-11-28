@@ -1,0 +1,10 @@
+[program:ara-web]
+directory={{ara_home}}
+environment=ARA_DIR="{{ara_home}}",ARA_DATABASE="sqlite:///{{ara_home}}/ansible.sqlite",ARA_HOST="{{ ara_host | default ('127.0.0.1') }}",ARA_PORT="{{ara_port | default('9191')}}",ARA_LOG_FILE="{{ara_home}}/ara.log",ARA_LOG_LEVEL="INFO"
+command={{ara_virtual_env | default("/usr/local")}}/bin/ara-manage runserver -h {{ ara_host | default ('127.0.0.1') }} -p {{ara_port | default('9191')}}
+autostart=true
+autorestart=true
+redirect_stderr=true
+user=ara
+stdout_logfile=syslog
+stderr_logfile=syslog

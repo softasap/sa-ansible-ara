@@ -7,7 +7,7 @@ Type=simple
 User=ara
 Group=ara
 WorkingDirectory={{ara_home}}
-ExecStart=ara-manage runserver
+ExecStart={{ara_virtual_env | default("/usr/local")}}/bin/ara-manage runserver
 
 [Install]
 WantedBy=multi-user.target

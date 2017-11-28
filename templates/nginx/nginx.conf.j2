@@ -21,7 +21,7 @@ server {
     access_log  /var/log/nginx/{{ ara_domain }}.access.log;
 
     location / {
-        proxy_pass          http://localhost:9000;
+        proxy_pass          http://localhost:9191;
         proxy_redirect      off;
 
         proxy_set_header    Host                    $host;

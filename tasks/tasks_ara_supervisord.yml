@@ -1,0 +1,17 @@
+---
+
+  - name: ARA | template /etc/supervisord/programs/ara.conf
+    template: src="{{role_dir}}/templates/supervisord/ara.conf.j2" dest="/etc/supervisor/conf.d/ara.conf"
+    become: yes
+
+  - name: ARA | Ensure supervisor started
+    service: name="supervisor" state="started"
+    become: yes
+
+  - name: ARA | supervisorctl reread
+    shell: supervisorctl reread
+    become: yes
+
+  - name: ARA | supervisorctl update
+    shell: supervisorctl update
+    become: yes

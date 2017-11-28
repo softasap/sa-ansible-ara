@@ -10,7 +10,7 @@
     with_items:
       - "{{ara_home}}"
       - "{{ara_log_dir}}"
-      - "{{ara_virtual_env}}"
+      - "{{ara_virtual_env | default(ara_home)}}"
     become: yes
     tags:
       - ara
@@ -29,7 +29,24 @@
       - ara
 
   - name: ARA | Install Ara
-    pip: name=ara version={{ara_version | default(omit)}} virtualenv="{{ara_virtual_env}}"
+    pip: name=ara version={{ara_version | default(omit)}} virtualenv="{{ara_virtual_env | default(omit)}}"
     become: yes
-    become_user: "{{ara_user}}"
+    become_user: "{{ara_user if ara_virtual_env is defined else 'root'}}"
     notify: restart ara
+
+  - set_fact:
+      ara_virtualenv_path: ""
+    when: ara_virtual_env is not defined
+
+  - set_fact:
+      ara_virtualenv_path: "{{ara_virtual_env}}/bin"
+    when: ara_virtual_env is defined
+
+  - name: ARA | get ara path
+    shell: "{{ara_virtualenv_path}}python -c \"import os,ara; print(os.path.dirname(ara.__file__))\""
+    register: ara_location_raw
+
+  - set_fact:
+      ara_location: "{{ara_location_raw.stdout}}"
+
+  - debug: msg=" Use ANSIBLE_CALLBACK_PLUGINS={{ara_location}}/plugins/callbacks to instruct ansible to report to ara"

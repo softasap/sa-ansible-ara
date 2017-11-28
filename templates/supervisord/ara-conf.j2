@@ -1,9 +1,0 @@
-[program:ara-web]
-directory={{ara_home}}
-command={{ara_virtual_env}}/bin/ara-manage runserver
-autostart=true
-autorestart=true
-redirect_stderr=true
-user=ara
-stdout_logfile=syslog
-stderr_logfile=syslog
