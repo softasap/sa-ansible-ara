@@ -2,14 +2,17 @@
 # handlers file for sa-ansible-ara
   - name: restart ara
     service: name="supervisor" state="stopped"    
+    when: docker_test is not defined
     become: yes
     notify: start ara
 
   - name: start ara
     service: name="supervisor" state="started"
+    when: docker_test is not defined
     become: yes
 
   - name: restart nginx
     service: name="nginx" state="restarted"
+    when: docker_test is not defined
     become: yes
 
