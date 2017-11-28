@@ -1,0 +1,35 @@
+---
+  - name: ARA | Create dedicated user
+    user: name="{{ara_user}}"
+    become: yes
+    tags:
+      - ara
+
+  - name: ARA | Create directories
+    file: path="{{item}}" state=directory owner="{{ara_user}}"
+    with_items:
+      - "{{ara_home}}"
+      - "{{ara_log_dir}}"
+      - "{{ara_virtual_env}}"
+    become: yes
+    tags:
+      - ara
+
+  - name: ARA | Install package dependencies
+    apt: pkg="{{item}}"
+    with_items:
+      - "software-properties-common"
+      - "python-dev"
+      - "apt-transport-https"
+      - "libssl-dev"
+      - "gcc"
+      - "libyaml-dev"
+    become: yes
+    tags:
+      - ara
+
+  - name: ARA | Install Ara
+    pip: name=ara version={{ara_version | default(omit)}} virtualenv="{{ara_virtual_env}}"
+    become: yes
+    become_user: "{{ara_user}}"
+    notify: restart ara

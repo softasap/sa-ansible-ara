@@ -1,0 +1,15 @@
+---
+# handlers file for sa-ansible-ara
+  - name: restart ara
+    service: name="supervisor" state="stopped"    
+    become: yes
+    notify: start ara
+
+  - name: start ara
+    service: name="supervisor" state="started"
+    become: yes
+
+  - name: restart nginx
+    service: name="nginx" state="restarted"
+    become: yes
+

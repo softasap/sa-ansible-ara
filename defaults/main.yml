@@ -1,0 +1,16 @@
+---
+# defaults file for sa-ansible-ara
+
+role_dir: "{{role_path}}"
+
+option_configure_startup: true
+option_configure_nginx: true
+
+ara_user: ara
+ara_home: "/home/{{ara_user}}"
+ara_virtual_env: "/home/{{ara_user}}/virtual_envs"
+ara_log_dir: /var/log/ara
+
+ara_ssl_key: ara
+ara_ssl_crt: ara
+ara_domain: ara.voronenko.info

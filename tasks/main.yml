@@ -1,0 +1,12 @@
+---
+# tasks file for sa-ansible-ara
+
+  - include: __detect_init_system.yml
+
+  - include: tasks_ara.yml
+
+  - include: tasks_ara_supervisord.yml
+    when: option_configure_startup
+
+  - include: tasks_ara_nginx.yml
+    when: option_configure_nginx

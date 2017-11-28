@@ -1,0 +1,13 @@
+[Unit]
+Description=Ara Service
+After=network.target
+
+[Service]
+Type=simple
+User=ara
+Group=ara
+WorkingDirectory={{ara_home}}
+ExecStart=ara-manage runserver
+
+[Install]
+WantedBy=multi-user.target
