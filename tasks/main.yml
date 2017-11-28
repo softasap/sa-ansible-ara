@@ -6,9 +6,9 @@
   - include: tasks_ara.yml
 
   - include: tasks_ara_supervisord.yml
-    when: option_configure_startup
+    when: option_configure_startup and docker_test is not defined
 
   - include: tasks_ara_nginx.yml
-    when: option_configure_nginx
+    when: option_configure_nginx and docker_test is not defined
 
   - debug: msg=" Use ANSIBLE_CALLBACK_PLUGINS={{ara_location}}/plugins/callbacks to instruct ansible to report to ara"
